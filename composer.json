@@ -1,0 +1,17 @@
+{
+    "name": "gabema/ssrs-sdk",
+    "description": "PHP library for connecting to SSRS SOAP",
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "Gabe Martin",
+            "email": "gabema@gmail.com"
+        }
+    ],
+    "require": {
+      "php": ">=5.3"
+    },
+    "autoload": {
+        "psr-4": {"SSRS\\": "library/"}
+    }
+}
