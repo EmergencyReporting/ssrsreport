@@ -28,23 +28,17 @@
   *
   * class Credentials
   */
-  
+
 class Credentials
 {
     private $_userName;
     private $_password;
 
     /**
-     * Default construcor for Credential class
-     */
-    public function Credentails()
-    {}
-
-    /**
      * @param string $userName The user Name
      * @return string  $password The Password
      */
-    public function Credentials($userName, $password)
+    public function __construct($userName = null, $password = null)
     {
         $this->_userName = $userName;
         $this->_password = $password;

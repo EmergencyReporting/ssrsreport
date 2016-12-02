@@ -30,52 +30,52 @@
   */
 class RenderAsHTML extends RenderBaseType implements IRenderType
 {
-    /**     
+    /**
      * @xml : BookmarkID
      */
     public $BookmarkID;
 
-   /**    
+   /**
     * @xml :DocMap
     */
     public $DocMap;
 
-    /**     
+    /**
      * @xml : ExpandContent
      */
     public $ExpandContent;
 
-    /**     
+    /**
      * @xml : FindString
      */
     public $FindString;
 
-    /**     
+    /**
      * @xml : GetImage
      */
     public $GetImage;
 
-    /**     
+    /**
      * @xml : HTMLFragment
      */
      public $HTMLFragment;
 
-    /**     
+    /**
      * @xml : JavaScript
      */
      public $JavaScript;
 
-    /**     
+    /**
      * @xml : LinkTarget
      */
     public $LinkTarget;
 
-    /**     
+    /**
      * @xml : OnlyVisibleStyles
      */
     public $OnlyVisibleStyles;
 
-    /**     
+    /**
      * @xml : Parameters
      */
     public $Parameters;
@@ -85,33 +85,33 @@ class RenderAsHTML extends RenderBaseType implements IRenderType
      * @xml : ReplacementRoot
      */
     public $ReplacementRoot;
-    
-    /**     
+
+    /**
      * @xml : Section
      */
     public $Section;
 
-    /**     
+    /**
      * @xml : StreamRoot
      */
     public $StreamRoot;
 
-    /**     
+    /**
      * @xml : StyleStream
      */
     public $StyleStream;
 
-    /**     
+    /**
      * @xml : Toolbar
      */
     public $Toolbar;
 
-    /**     
+    /**
      * @xml : Zoom
      */
     public $Zoom;
 
-    public function RenderAsHTML()
+    public function __construct()
     {
         $this->BookmarkID = null;
         $this->DocMap = null;
@@ -129,7 +129,7 @@ class RenderAsHTML extends RenderBaseType implements IRenderType
         $this->Toolbar = null;
         $this->Zoom = null;
     }
-    
+
     public function GetFormat()
     {
         return "HTML4.0";

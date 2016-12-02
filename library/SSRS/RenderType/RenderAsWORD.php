@@ -30,32 +30,32 @@
   */
 class RenderAsWORD extends RenderBaseType implements IRenderType
 {
-    /**     
+    /**
      * @xml : AutoFit
      */
     public $AutoFit;
 
-    /**     
+    /**
      * @xml : ExpandToggles
      */
     public $ExpandToggles;
 
-    /**     
+    /**
      * @xml : FixedPageWidth
      */
     public $FixedPageWidth;
 
-    /**     
+    /**
      * @xml : OmitHyperlinks
      */
     public $OmitHyperlinks;
 
-    /**     
+    /**
      * @xml : OmitDrillthroughs
      */
     public $OmitDrillthroughs;
 
-    public function RenderAsWORD()
+    public function __construct()
     {
         $this->AutoFit = null;
         $this->ExpandToggles = null;

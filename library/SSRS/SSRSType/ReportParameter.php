@@ -31,7 +31,7 @@
 class ReportParameter implements ISSRSBaseType
 {
 
-    public function ReportParameter()   
+    public function __construct()
     {
         $this->TypeSpecified = false;
         $this->NullableSpecified = false;
@@ -43,7 +43,7 @@ class ReportParameter implements ISSRSBaseType
         $this->DefaultValuesQueryBasedSpecified = false;
         $this->StateSpecified = false;
     }
-    
+
     /**
      * @type : string
      * @IsCollection : false
@@ -192,7 +192,7 @@ class ReportParameter implements ISSRSBaseType
     public $ErrorMessage;
 
     public function Initialize()
-    {                   
+    {
         $this->TypeSpecified = isset($this->Type);
         $this->NullableSpecified = is_bool($this->Nullable);
         $this->AllowBlankSpecified = is_bool($this->AllowBlank);
@@ -203,7 +203,7 @@ class ReportParameter implements ISSRSBaseType
         $this->DefaultValuesQueryBasedSpecified = is_bool($this->DefaultValuesQueryBased);
         $this->StateSpecified = isset($this->State);
     }
-    
+
     public function FromStdObject($stdObject)
     {
         throw new PReportException('Not Implemented');

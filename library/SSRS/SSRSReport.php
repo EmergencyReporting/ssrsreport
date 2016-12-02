@@ -104,14 +104,14 @@ class SSRSReport
     protected $_BaseUrl;
 
     /**
-     * 
+     *
      * @var Credential
      */
     protected $_credentials;
-    
+
     /**
      *
-     * @var SoapClient 
+     * @var SoapClient
      */
     protected $_soapHandle_Exe;
 
@@ -152,17 +152,21 @@ class SSRSReport
      * Management Service End Point
      */
     const ManagementService = "ReportService2005.asmx?wsdl";
+    const ManagementService2010 = "ReportService2010.asmx?wsdl";
 
-    /**     
+    /**
      * Default constructor for ReportExecutionService.
      * @param Credential $credentials Object holding user credentials.
      * @param string $url Url of Report Server.
      */
-    public function SSRSReport($credentials, $url, $proxy = null)
-    {        
+    public function __construct($credentials, $url, $proxy = null, $ssrsVersion = 2005)
+    {
         $this->_BaseUrl = ($url[strlen($url) - 1] == '/')? $url : $url . '/';
         $executionServiceUrl = $this->_BaseUrl . self::ExecutionService;
         $managementServiceUrl = $this->_BaseUrl . self::ManagementService;
+        if ($ssrsVersion > 2009) {
+            $managementServiceUrl = $this->_BaseUrl . self::ManagementService2010;
+        }
 
         $options = $credentials->getCredentails();
         $stream_conext_params = array( 'http' =>
@@ -176,11 +180,11 @@ class SSRSReport
                                                         ':' .
                                                         $proxy->getPort();
             if($proxy->getLogin() != null)
-            {               
+            {
                 $stream_conext_params['http']['header'][1] = $proxy->getBase64Auth();
-            }            
+            }
         }
-        
+
         /**
          * If the SoapClient call fails, we cannot catch exception or supress warning
          * since it throws php fatal exception.
@@ -197,8 +201,8 @@ class SSRSReport
             throw new SSRSReportException("",
                         "Failed to connect to Reporting Service  <br/> Make sure " .
                         "that the url ($this->_BaseUrl) and credentials are correct!");
-        }     
-       
+        }
+
         $this->_soapHandle_Exe =  new SoapClient ($executionServiceUrl, $options);
         $this->_soapHandle_Mgt =  new SoapClient ($managementServiceUrl, $options);
         $this->ClearRequest();
@@ -221,7 +225,7 @@ class SSRSReport
                            );
        try
        {
-            $stdObject = $this->_soapHandle_Mgt->ListChildren($parameters);            
+            $stdObject = $this->_soapHandle_Mgt->ListChildren($parameters);
             $catalogItemCollection = SSRSTypeFactory::CreateSSRSObject(
                                                         'CatalogItemCollection',
                                                         $stdObject);
@@ -248,7 +252,7 @@ class SSRSReport
      * @return ReportParameter[] An array of ReportParameter objects that lists
      *        the prameters for the report
      */
-    public function GetReportParameters($Report, 
+    public function GetReportParameters($Report,
                                         $HistoryID = null,
                                         $ForRendering = false,
                                         $Values = null,
@@ -316,7 +320,7 @@ class SSRSReport
                            );
         try
         {
-            $stdObject = $this->_soapHandle_Exe->LoadReportDefinition2($parameters);            
+            $stdObject = $this->_soapHandle_Exe->LoadReportDefinition2($parameters);
             $this->ExecutionInfo2 = SSRSTypeFactory::CreateSSRSObject(
                                        'ExecutionInfo2',
                                        $stdObject);
@@ -328,14 +332,14 @@ class SSRSReport
         }
     }
 
-    /**     
+    /**
      * Loads a report from the report server into a new execution.
      * @param string $report The full name of the report.
      * @param string $historyID The history ID of the snapshot.
      * @return ExecutionInfo An ExecutionInfo object containing information
      *                                                 for the loaded report.
      */
-    public function LoadReport2($report, 
+    public function LoadReport2($report,
                                 $historyID = null)
     {
         $parameters = array(
@@ -344,20 +348,20 @@ class SSRSReport
                            );
         try
         {
-            $stdObject = $this->_soapHandle_Exe->LoadReport2($parameters);            
+            $stdObject = $this->_soapHandle_Exe->LoadReport2($parameters);
             $this->ExecutionInfo2 = SSRSTypeFactory::CreateSSRSObject(
                                                         'ExecutionInfo2',
                                                         $stdObject);
-            
+
             return $this->ExecutionInfo2;
         }
         catch (SoapFault $soapFault)
-        {          
+        {
            self::ThrowReportException($soapFault);
         }
     }
 
-    /**     
+    /**
      * Returns information about the report execution.
      * @return ExecutionInfo An  ExecutionInfo object containing information
      *                                            about the report execution.
@@ -378,7 +382,7 @@ class SSRSReport
         }
     }
 
-    /**     
+    /**
      * Returns a list of rendering extensions.
      * @return Extensions[] An array of  Extension objects that contains
      *                                the available rendering extensions.
@@ -397,17 +401,17 @@ class SSRSReport
         {
             self::ThrowReportException($soapFault);
         }
-        
+
     }
 
-    /**     
+    /**
      * Sets and validates parameter values associated with
      *                                          the current report execution.
      * @param ParameterValue[] $parameters An array of ParameterValue objects.
      * @param string $parameterLanguage locale identifier
      * @return ExecutionInfo An  ExecutionInfo object containing the new execution.
      */
-    public function SetExecutionParameters2($parameters, 
+    public function SetExecutionParameters2($parameters,
                                             $parameterLanguage = "en-us")
     {
         $parameters = array (
@@ -453,23 +457,23 @@ class SSRSReport
                         strpos($renderType->ReplacementRoot, '?') !== false ?
                         '&amp;amp;' :
                         '?amp;';
-            
+
             $renderType->ReplacementRoot .= 'ps%3aSessionID=' .
                                             $this->ExecutionInfo2->ExecutionID .
-                                            '&amp;amp;ps%3aOrginalUri=';            
-        }        
-        
+                                            '&amp;amp;ps%3aOrginalUri=';
+        }
+
         $parameters = array (
                                 "Format" => $renderType->GetFormat(),
                                 "DeviceInfo" => $renderType->GetDevInfoXML(),
                                 "PaginationMode" => $PaginationMode
                             );
-                            
+
         try
         {
             $this->SetSessionId();
             $stdObject = $this->_soapHandle_Exe->Render2($parameters);
-            
+
             $renderResponse = SSRSTypeFactory::CreateSSRSObject(
                                                    'RenderResponse',
                                                    $stdObject);
@@ -479,7 +483,7 @@ class SSRSReport
             $Warnings = $renderResponse->Warnings;
             $StreamIds = $renderResponse->StreamIds->string;
             return $renderResponse->Result;
-            
+
         }
         catch(SoapFault $soapFault)
         {
@@ -488,7 +492,7 @@ class SSRSReport
     }
 
     /**
-     * Gets a secondary rendering stream associated with a processed report. 
+     * Gets a secondary rendering stream associated with a processed report.
      * @param RenderBaseType $renderType $renderType Object
      *                        holding Format and DeviceInfo.
      * @param string $StreamID The stream identifier.
@@ -567,10 +571,10 @@ class SSRSReport
             self::ThrowReportException($soapFault);
          }
     }
-    
+
     /**
      *
-     * @param <string> $SortItem The ID of the report item on which to sort. 
+     * @param <string> $SortItem The ID of the report item on which to sort.
      * @param <SortDirectionEnum> $Direction A SortDirectionEnum value
      *                          containing the direction for the sort.
      * @param <bool> $Clear A Boolean value that indicates whether all
@@ -579,7 +583,7 @@ class SSRSReport
      *                          the report is processed.
      * @param <string> $ReportItem The ID of the item on the page used
      *                          for positioning in the viewing area.
-     * @return <ExecutionInfo2> 
+     * @return <ExecutionInfo2>
      */
     public function Sort2($SortItem, $Direction, $Clear,
                           $PaginationMode, &$ReportItem, &$ExecutionInfo)
@@ -591,9 +595,9 @@ class SSRSReport
                                 "PaginationMode" => $PaginationMode
                             );
         try
-        {            
+        {
             $this->SetSessionId(true);
-            $stdObject = $this->_soapHandle_Exe->Sort2($parameters);            
+            $stdObject = $this->_soapHandle_Exe->Sort2($parameters);
             $sort2Response = SSRSTypeFactory::CreateSSRSObject(
                                                          'Sort2Response',
                                                          $stdObject);
@@ -624,7 +628,7 @@ class SSRSReport
                                                          'ToggleItemResponse',
                                                          $stdObject);
             return $toggleItemResponse->Found;
-            
+
         }
         catch(SoapFault $soapFault)
         {
@@ -643,10 +647,10 @@ class SSRSReport
            isset($_REQUEST['ps:SessionID'])
         )
         {
-            $this->ExecutionInfo2->ExecutionID = $_REQUEST['ps:SessionID'];            
-        }    
-        
-        $headerStr = sprintf(self::EXECUTIONHEADER_FORMAT, 
+            $this->ExecutionInfo2->ExecutionID = $_REQUEST['ps:SessionID'];
+        }
+
+        $headerStr = sprintf(self::EXECUTIONHEADER_FORMAT,
                              self::NAMESPACE_REPORTSERVICE,
                              $this->ExecutionInfo2->ExecutionID);
         $soapVar = new SoapVar($headerStr, XSD_ANYXML, null, null, null);
@@ -677,14 +681,14 @@ class SSRSReport
      * @param SoapFault $soapFault
      */
     protected function ThrowReportException($soapFault)
-    {        
+    {
         if(isset($soapFault->detail) && is_object($soapFault->detail))
-        {            
+        {
             throw new SSRSReportException($soapFault->detail->ErrorCode,
                                        $soapFault->detail->Message,
                                        $soapFault);
         }
-        else if(is_string($soapFault->detail) && !empty($soapFault->detail))
+        else if(property_exists($soapFault,'detail') && !empty($soapFault->detail) && is_string($soapFault->detail))
         {
             throw new SSRSReportException('', $soapFault->detail, $soapFault);
         }
@@ -692,7 +696,7 @@ class SSRSReport
         {
             $lines = explode("\n", $soapFault->getMessage());
                      throw new SSRSReportException('', $lines[0], $soapFault);
-        }        
+        }
     }
 }
 ?>

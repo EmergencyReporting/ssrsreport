@@ -40,13 +40,13 @@ class SSRSReportException extends Exception
      * @param <string> $errorDescription The error details
      * @param <SoapFault> $soapFault The SoapFault object
      */
-    public function SSRSReportException($errorCode, $errorDescription,
+    public function __construct($errorCode, $errorDescription,
                                      $soapFault = null)
     {
         $this->errorCode = $errorCode;
         $this->errorDescription = $errorDescription;
         $this->soapFault = $soapFault;
-    }  
+    }
 
     /**
      *
@@ -54,12 +54,12 @@ class SSRSReportException extends Exception
      */
     public function GetErrorMessage()
     {
-        $message ="";        
+        $message ="";
         if (!empty($this->errorCode))
         {
             $message = "ErrorCode: " . $this->errorCode;
             $message  .= "<br/>Error Message: ";
-        }        
+        }
         $message .= $this->errorDescription;
         return $message;
     }
