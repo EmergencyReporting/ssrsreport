@@ -1,5 +1,5 @@
 {
-    "name": "gabema/ssrs-sdk",
+    "name": "ercorp/ssrs-sdk",
     "description": "PHP library for connecting to SSRS SOAP",
     "license": "BSD",
     "authors": [
