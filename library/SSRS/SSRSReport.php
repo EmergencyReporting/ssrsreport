@@ -24,6 +24,8 @@
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   */
 
+namespace SSRS;
+
 require_once 'SSRSReportException.php';
 require_once 'Utility.php';
 require_once 'Common/Credentials.php';
