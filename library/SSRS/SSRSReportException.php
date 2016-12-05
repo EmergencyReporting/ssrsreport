@@ -30,7 +30,7 @@ namespace SSRS;
   *
   * class SSRSReportException
   */
-class SSRSReportException extends Exception
+class SSRSReportException extends \Exception
 {
     public $errorCode;
     public $errorDescription;
