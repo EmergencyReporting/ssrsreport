@@ -24,6 +24,8 @@
   * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   */
 
+namespace SSRS\TestConnection;
+
 require_once 'SSRSReport.php';
 
 /**

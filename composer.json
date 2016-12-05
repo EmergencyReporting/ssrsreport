@@ -19,7 +19,13 @@
 	},
     "autoload": {
         "psr-4": {
-			"SSRS\\": "library/"
+			"SSRS\\": "library/SSRS/",
+			"SSRS\\Common\\": "library/SSRS/Common/",
+			"SSRS\\Factory\\": "library/SSRS/Factory/",
+			"SSRS\\Interfaces\\": "library/SSRS/Interface/",
+			"SSRS\\RenderType\\": "library/SSRS/RenderType/",
+			"SSRS\\SSRSType\\": "library/SSRS/SSRSType/",
+			"SSRS\\TestConnection\\": "library/SSRS/TestConnection/"
 		}
     }
 }
