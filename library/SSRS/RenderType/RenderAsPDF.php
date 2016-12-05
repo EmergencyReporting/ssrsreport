@@ -30,63 +30,63 @@
   */
 class RenderAsPDF extends RenderBaseType implements IRenderType
 {
-    /**     
+    /**
      * @xml : Columns
      */
     public $Columns;
 
-   /**    
+   /**
     * @xml :ColumnSpacing
     */
     public $ColumnSpacing;
 
-    /**     
+    /**
      * @xml : EndPage
      */
     public $EndPage;
 
-   /**    
+   /**
     * @xml :HumanReadablePDF
     */
     public $HumanReadablePDF;
 
-    /**     
+    /**
      * @xml : MarginBottom
      */
     public $MarginBottom;
 
-   /**    
+   /**
     * @xml :MarginLeft
     */
     public $MarginLeft;
 
-    /**     
+    /**
      * @xml : MarginRight
      */
     public $MarginRight;
 
-   /**    
+   /**
     * @xml :MarginTop
     */
     public $MarginTop;
 
-    /**     
+    /**
      * @xml : PageHeight
      */
     public $PageHeight;
 
-   /**    
+   /**
     * @xml :PageWidth
     */
     public $PageWidth;
 
-    /**     
+    /**
      * @xml : StartPage
      */
     public $StartPage;
 
 
-    public function RenderAsPDF()
+    public function __construct()
     {
         $this->Columns          = null;
         $this->ColumnSpacing    = null;

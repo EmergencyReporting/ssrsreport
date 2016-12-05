@@ -30,22 +30,22 @@
   */
 class RenderAsEXCEL extends RenderBaseType implements IRenderType
 {
-    /**     
+    /**
      * @xml : OmitDocumentMap
      */
     public $OmitDocumentMap;
 
-    /**     
+    /**
      * @xml : OmitFormulas
      */
     public $OmitFormulas;
 
-    /**     
+    /**
      * @xml : SimplePageHeaders
      */
     public $SimplePageHeaders;
 
-    public function RenderAsEXCEL()
+    public function __construct()
     {
         $this->OmitDocumentMap = null;
         $this->OmitFormulas = null;

@@ -30,17 +30,17 @@
   */
 class RenderAsMHTML extends RenderBaseType implements IRenderType
 {
-    /**     
+    /**
      * @xml : JavaScript
      */
     public $JavaScript;
 
-   /**    
+   /**
     * @xml :MHTMLFragment
     */
     public $MHTMLFragment;
 
-    public function RenderAsMHTML()
+    public function __construct()
     {
         $this->JavaScript    = null;
         $this->MHTMLFragment = null;

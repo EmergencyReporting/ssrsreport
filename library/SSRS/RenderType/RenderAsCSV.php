@@ -30,52 +30,52 @@
   */
 class RenderAsCSV extends RenderBaseType implements IRenderType
 {
-    /**     
+    /**
      * @xml : Encoding
      */
     public $Encoding;
 
-   /**    
+   /**
     * @xml :ExcelMode
     */
     public $ExcelMode;
 
-    /**     
+    /**
      * @xml : FieldDelimiter
      */
     public $FieldDelimiter;
 
-    /**     
+    /**
      * @xml : FileExtension
      */
     public $FileExtension;
 
-    /**     
+    /**
      * @xml : NoHeader
      */
     public $NoHeader;
 
-    /**     
+    /**
      * @xml : Qualifier
      */
      public $Qualifier;
 
-    /**     
+    /**
      * @xml : RecordDelimiter
      */
      public $RecordDelimiter;
 
-     /**     
+     /**
      * @xml : SuppressLineBreaks
      */
     public $SuppressLineBreaks;
 
-    /**     
+    /**
      * @xml : UseFormattedValues
      */
     public $UseFormattedValues;
 
-    public function RenderAsCSV()
+    public function __construct()
     {
         $this->Encoding = null;
         $this->ExcelMode = null;

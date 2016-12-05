@@ -30,48 +30,48 @@
   */
 class RenderAsXML extends RenderBaseType implements IRenderType
 {
-    /**     
+    /**
      * @xml : XSLT
      */
     public $XSLT;
 
-    /**     
+    /**
      * @xml : MIMEType
      */
     public $MIMEType;
 
-    /**     
+    /**
      * @xml : UseFormattedValues
      */
     public $UseFormattedValues;
 
-    /**     
+    /**
      * @xml : Indented
      */
     public $Indented;
 
-    /**     
+    /**
      * @xml : OmitSchema
      */
     public $OmitSchema;
 
-    /**     
+    /**
      * @xml : Encoding
      */
     public $Encoding;
 
-    /**     
+    /**
      * @xml : FileExtension
      */
     public $FileExtension;
 
-    /**     
+    /**
      * @xml : Schema
      */
     public $Schema;
 
 
-    public function RenderAsXML()
+    public function __construct()
     {
         $this->XSLT = null;
         $this->MIMEType = null;
@@ -80,7 +80,7 @@ class RenderAsXML extends RenderBaseType implements IRenderType
         $this->OmitSchema = null;
         $this->Encoding = null;
         $this->FileExtension = null;
-        $this->Schema = null; 
+        $this->Schema = null;
     }
 
     public function GetFormat()

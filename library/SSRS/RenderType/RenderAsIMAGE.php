@@ -30,77 +30,77 @@
   */
 class RenderAsIMAGE extends RenderBaseType implements IRenderType
 {
-    /**    
+    /**
      * @xml : ColorDepth
      */
     public $ColorDepth;
 
-    /**     
+    /**
      * @xml : Columns
      */
     public $Columns;
-    
-    /**     
+
+    /**
      * @xml : ColumnSpacing
      */
     public $ColumnSpacing;
-    
-    /**     
+
+    /**
      * @xml : DpiX
      */
     public $DpiX;
-    
-    /**     
+
+    /**
      * @xml : DpiY
      */
      public $DpiY;
 
-     /**      
+     /**
       * @xml : EndPage
       */
      public $EndPage;
 
-     /**      
+     /**
       * @xml : MarginBottom
       */
      public $MarginBottom;
 
-     /**      
+     /**
       * @xml : MarginLeft
       */
      public $MarginLeft;
 
-     /**      
+     /**
       * @xml : MarginRight
       */
      public $MarginRight;
 
-     /**      
+     /**
       * @xml : MarginTop
       */
      public $MarginTop;
 
-     /**      
+     /**
       * @xml : OutputFormat
       */
      public $OutputFormat;
 
-     /**      
+     /**
       * @xml : PageHeight
       */
      public $PageHeight;
 
-     /**      
+     /**
       * @xml : PageWidth
       */
      public $PageWidth;
 
-     /**      
+     /**
       * @xml : StartPage
       */
      public $StartPage;
 
-     public function RenderAsIMAGE()
+     public function __construct()
      {
         $this->ColorDepth  = null;
         $this->Columns = null;

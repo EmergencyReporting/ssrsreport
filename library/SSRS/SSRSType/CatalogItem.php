@@ -31,44 +31,44 @@
 class CatalogItem implements ISSRSBaseType
 {
 
-        /**         
+        /**
          * @type : string
          * @IsCollection : false
          */
         public $ID;
 
-        /**         
+        /**
          * @type : string
          * @IsCollection : false
          */
         public $Name;
 
-        /**         
+        /**
          * @type : string
          * @IsCollection : false
          */
         public $Path;
 
-        /**         
+        /**
          * @type : string
          * @IsCollection : false
          */
         public $VirtualPath;
 
-        /**         
+        /**
          * @type : ItemTypeEnum
          * @IsCollection : false
          * @IsEnum : true
          */
         public $Type;
 
-        /**         
+        /**
          * @type : string
          * @IsCollection : false
          */
         public $Size;
 
-        /**         
+        /**
          * @type : bool
          * @IsCollection : false
          */
@@ -80,72 +80,72 @@ class CatalogItem implements ISSRSBaseType
          */
         public $Description;
 
-        /**         
+        /**
          * @type : bool
          * @IsCollection : false
          */
         public $Hidden;
 
-        /**         
+        /**
          * @type : bool
          * @IsCollection : false
          */
         public $HiddenSpecified;
 
-        /**         
+        /**
          * @type : DateTime
          * @IsCollection : false
          */
         public $CreationDate;
 
-        /**         
+        /**
          * @type : bool
          * @IsCollection : false
          */
         public $CreationDateSpecified;
 
-        /**         
+        /**
          * @type : DateTime
          * @IsCollection : false
          */
         public $ModifiedDate;
 
-        /**         
+        /**
          * @type : bool
          * @IsCollection : false
          */
         public $ModifiedDateSpecified;
 
-        /**         
+        /**
          * @type : string
          * @IsCollection : false
          */
         public $CreatedBy;
 
-        /**         
+        /**
          * @type : string
          * @IsCollection : false
          */
         public $ModifiedBy;
 
-        /**         
+        /**
          * @type : string
          * @IsCollection : false
          */
         public $MimeType;
 
-        /**         
+        /**
          * @type : DateTime
          * @IsCollection : false
          */
         public $ExecutionDate;
 
-        /**         
+        /**
          * @type : bool
          * @IsCollection : false
          */
 
-        public function CatalogItem()
+        public function __construct()
         {
             $this->SizeSpecified = false;
             $this->HiddenSpecified = false;
