@@ -32,8 +32,7 @@ namespace SSRS\Common;
  *
  * @copyright  2009 Persistent System Limited
  */
-class Proxy
-{
+class Proxy {
     private $_address;
     private $_port;
     private $_login;
@@ -45,8 +44,7 @@ class Proxy
      * @param string $login The Proxy Server login name
      * @param string $password The Proxy Server Password
      */
-    public function __construct($address, $port, $login = null, $password = null)
-    {
+    public function __construct($address, $port, $login = null, $password = null) {
         $this->_address = $address;
         $this->_port = $port;
         $this->_login = $login;
@@ -54,52 +52,41 @@ class Proxy
     }
 
     /**
-     *
-     * @return <string> Proxy host
+     * @return string <string> Proxy host
      */
-    public function getHost()
-    {
+    public function getHost() {
         return $this->_address;
     }
 
     /**
-     *
-     * @return <string> Proxy Port
+     * @return string <string> Proxy Port
      */
-    public function getPort()
-    {
+    public function getPort() {
         return $this->_port;
     }
 
     /**
-     *
-     * @return <string> Porxy login name
+     * @return null|string <string> Proxy login name
      */
-    public function getLogin()
-    {
+    public function getLogin() {
         return $this->_login;
     }
 
     /**
-     *
-     * @return <string> Proxy Password
+     * @return null|string <string> Proxy Password
      */
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->_password;
     }
 
     /**
-     *
-     * @return <array> proxy as key value pair
+     * @return array <array> proxy as key value pair
      */
-    public function getProxy()
-    {
+    public function getProxy() {
         $options = array();
         $options['proxy_host'] = $this->_address;
         $options['proxy_port'] = intval($this->_port);
-        if (isset($this->_login))
-        {
+        if (isset($this->_login)) {
             $options['proxy_login'] = $this->_login;
             $options['proxy_password'] = $this->_password;
         }
@@ -107,11 +94,12 @@ class Proxy
         return $options;
     }
 
-    public function getBase64Auth()
-    {
+    public function getBase64Auth() {
         return "Proxy-Authorization: Basic " .
                base64_encode($this->_login .
                              ':' .
                              $this->_password);
     }
-};
+}
+
+;
