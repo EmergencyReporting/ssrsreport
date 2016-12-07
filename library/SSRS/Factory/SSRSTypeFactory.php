@@ -49,9 +49,9 @@ class SSRSTypeFactory {
      * To register a SSRS type with factory
      * @param string $ssrsType
      */
-    public static function RegsiterType($ssrsType) {
+    public static function RegisterType($ssrsType) {
         $class = new ReflectionClass($ssrsType);
-        if (!$class->implementsInterface('ISSRSBaseType')) {
+        if (!$class->implementsInterface('SSRS\Interfaces\ISSRSBaseType')) {
             throw new SSRSReportException("",
                 "Only classes which implements 'ISSRSBaseType' " .
                 "can be registered with SSRSTypeFactory");
