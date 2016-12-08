@@ -25,6 +25,7 @@
  */
 
 namespace SSRS\SSRSType;
+
 use ReflectionClass;
 use ReflectionProperty;
 use SSRS\Factory\SSRSTypeFactory;
@@ -36,15 +37,17 @@ use SSRS\Utility;
  * class SSRSBaseType
  */
 abstract class SSRSBaseType {
+
     /**
      *
      * @param string $type
-     * @param StdObject $stdObject
-     * @return ssrs Object
+     * @param object $stdObject
+     * @return object ssrs Object
      */
     protected function FromStdObject_Base($type, $stdObject) {
 
         if ($type != 'self') {
+            $type = SSRSTypeFactory::TYPE_NAMESPACE . $type;
             $class = new ReflectionClass($type);
             $object = $class->newInstance();
         }
@@ -88,10 +91,10 @@ abstract class SSRSBaseType {
 
     /**
      *
-     * @param StdObject $stdObject
+     * @param object $stdObject
      * @param string $propertyName
      * @param array $attributes
-     * @return basic type or collection of basic types
+     * @return mixed basic type or collection of basic types
      */
     protected function EnumerateBasicObject($stdObject, $propertyName, $attributes) {
         $objectAsArray = (array)$stdObject;
@@ -119,10 +122,10 @@ abstract class SSRSBaseType {
 
     /**
      *
-     * @param StdObject $stdObject
+     * @param object $stdObject
      * @param string $propertyName
      * @param array $attributes
-     * @return ssrs type or collection of ssrs types
+     * @return mixed ssrs type or collection of ssrs types
      */
     protected function EnumerateSSRSObject($stdObject, $propertyName, $attributes) {
         $objectAsArray = (array)$stdObject;

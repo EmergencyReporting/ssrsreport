@@ -25,6 +25,7 @@
  */
 
 namespace SSRS\Factory;
+
 use ReflectionClass;
 use SSRS\SSRSReportException;
 
@@ -33,6 +34,9 @@ use SSRS\SSRSReportException;
  * class SSRSTypeFactory
  */
 class SSRSTypeFactory {
+
+    const TYPE_NAMESPACE = "SSRS\\SSRSType\\";
+
     /**
      *
      * @var array
@@ -74,6 +78,7 @@ class SSRSTypeFactory {
      * @return mixed
      */
     public static function CreateSSRSObject($ssrsType, $stdObject) {
+        $ssrsType = SSRSTypeFactory::TYPE_NAMESPACE . $ssrsType;
         if (!array_key_exists($ssrsType, self::$SSRSTypes)) {
             throw new SSRSReportException("",
                 "Requested SSRS Type $ssrsType is not Registered!");
@@ -91,6 +96,7 @@ class SSRSTypeFactory {
      * @return string
      */
     public static function GetType($type) {
+
         $retType = 'unknown';
 
         if ($type == 'bool' || $type == 'int' ||
@@ -99,10 +105,13 @@ class SSRSTypeFactory {
         ) {
             $retType = 'basic';
         }
-        else if (array_key_exists($type, self::$SSRSTypes) ||
-                 array_key_exists($type, self::$SSRSEnums)
-        ) {
-            $retType = 'ssrs';
+        else {
+            $type = SSRSTypeFactory::TYPE_NAMESPACE . $type;
+            if (array_key_exists($type, self::$SSRSTypes) ||
+                array_key_exists($type, self::$SSRSEnums)
+            ) {
+                $retType = 'ssrs';
+            }
         }
         return $retType;
     }
