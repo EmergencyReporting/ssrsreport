@@ -25,6 +25,7 @@
  */
 
 namespace SSRS\RenderType;
+use SSRS\Interfaces\IRenderType;
 
 /**
  *
