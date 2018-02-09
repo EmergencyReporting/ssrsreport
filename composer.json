@@ -2,7 +2,7 @@
     "name": "ercorp/ssrs-sdk",
     "description": "PHP library for connecting to SSRS SOAP",
     "type": "library",
-    "license": "BSD",
+    "license": "MIT",
     "authors": [
         {
             "name": "Gabe Martin",
