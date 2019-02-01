@@ -41,7 +41,7 @@ class DataSourceCredential {
     public $userName;
     public $password;
 
-    public function DataSourceCredential($dataSourceName, $userName, $password) {
+    public function __construct($dataSourceName, $userName, $password) {
         $this->dataSourceName = $dataSourceName;
         $this->userName = $userName;
         $this->password = $password;
@@ -60,7 +60,7 @@ class TestSSRSConnection {
     protected $_uid;
     protected $_pwd;
 
-    public function TestSSRSConnection($args) {
+    public function __construct($args) {
         $this->_args = $args;
     }
 
