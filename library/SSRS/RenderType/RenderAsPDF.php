@@ -120,6 +120,4 @@ class RenderAsPDF extends RenderBaseType implements IRenderType {
     }
 }
 
-?>
-
 

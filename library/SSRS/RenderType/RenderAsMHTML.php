@@ -64,5 +64,3 @@ class RenderAsMHTML extends RenderBaseType implements IRenderType {
         return parent::GetDevInfoXML_Base($this);
     }
 }
-
-?>
